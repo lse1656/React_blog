@@ -1,5 +1,5 @@
 import './App.css';
-import { Navbar,Container,Nav,NavDropdown } from 'react-bootstrap';
+import { Navbar,Container,Nav,NavDropdown,Jumbotron,Button } from 'react-bootstrap';
 
 function App() {
   return (
@@ -23,6 +23,36 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <Jumbotron className="background">
+        <h1>20% Season Off</h1>
+        <p>
+          This is a simple hero unit, a simple jumbotron-style component for calling
+          extra attention to featured content or information.
+        </p>
+        <p>
+          <Button variant="primary">Learn more</Button>
+        </p>
+      </Jumbotron>
+    
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4">
+            <img src="https://codingapple1.github.io/shop/shoes1.jpg" alt=""/>
+            <h4>상품명</h4>
+            <p>상품설명 &amp; 가격</p>
+          </div>
+          <div className="col-md-4">
+            <img src="https://codingapple1.github.io/shop/shoes2.jpg" alt=""/>
+            <h4>상품명</h4>
+            <p>상품설명 &amp; 가격</p>
+          </div>
+          <div className="col-md-4">
+            <img src="https://codingapple1.github.io/shop/shoes3.jpg" alt=""/>
+            <h4>상품명</h4>
+            <p>상품설명 &amp; 가격</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
