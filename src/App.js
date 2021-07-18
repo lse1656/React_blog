@@ -14,12 +14,12 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
+          <Navbar.Brand><Link to="/">ShoeShop</Link></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Detail</Nav.Link>
+              <Nav.Link><Link to="/">Home</Link></Nav.Link>
+              <Nav.Link><Link to="/detail">Detail</Link></Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -32,32 +32,40 @@ function App() {
         </Container>
       </Navbar>
 
-      <Route exact path='/'>
-        <Jumbotron className="background">
-          <h1>20% Season Off</h1>
-          <p>
-            This is a simple hero unit, a simple jumbotron-style component for calling
-            extra attention to featured content or information.
-          </p>
-          <p>
-            <Button variant="primary">Learn more</Button>
-          </p>
-        </Jumbotron>
-        <div className="container">
-        <div className="row">
-          {
-            shoes.map((a,i) => {
-              return(
-                <Card shoes={shoes[i]} i={i} key={i} />
-              )
-            })
-          }
-        </div>
-      </div>
+      <Switch>
+        <Route exact path='/'>
+          <Jumbotron className="background">
+            <h1>20% Season Off</h1>
+            <p>
+              This is a simple hero unit, a simple jumbotron-style component for calling
+              extra attention to featured content or information.
+            </p>
+            <p>
+              <Button variant="primary">Learn more</Button>
+            </p>
+          </Jumbotron>
+          <div className="container">
+          <div className="row">
+            {
+              shoes.map((a,i) => {
+                return(
+                  <Card shoes={shoes[i]} i={i} key={i} />
+                )
+              })
+            }
+          </div>
+          </div>
+        </Route>
+
+      <Route path='/detail/:id'>
+        <Detail shoes={shoes}/>
       </Route>
-      <Route path='/detail'>
-        <Detail />
+
+      <Route path='/:id'>
+        <div>아무거나 적었을 때 이거 보여주셈!</div>
       </Route>
+      </Switch>
+      
     </div>
   );
 }
