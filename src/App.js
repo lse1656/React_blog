@@ -1,4 +1,3 @@
-/* eslint-disabled */
 import React, {useState} from 'react';
 import './App.css';
 import { Navbar,Container,Nav,NavDropdown,Jumbotron,Button } from 'react-bootstrap';
@@ -41,13 +40,13 @@ function App() {
       </Jumbotron>
       <div className="container">
         <div className="row">
-        {
-          shoes.map((i)=>{
-            return(
-              <Card title={i.title} content={i.content} price={i.price}/>
-            )
-          })
-        }
+          {
+            shoes.map((a,i) => {
+              return(
+                <Card shoes={shoes[i]} i={i} key={i} />
+              )
+            })
+          }
         </div>
       </div>
     </div>
@@ -57,9 +56,9 @@ function App() {
 function Card(props){
   return(
     <div className="col-md-4">
-      <img src="https://codingapple1.github.io/shop/shoes3.jpg" alt=""/>
-      <h4>{props.title}</h4>
-      <p>{props.content} &amp; {props.price}</p>
+      <img src={"https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"} alt=""/>
+      <h4>{ props.shoes.title }</h4>
+      <p>{ props.shoes.content } &amp; { props.shoes.price }</p>
     </div>
   )
 }
