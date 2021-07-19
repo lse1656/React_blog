@@ -3,6 +3,7 @@ import './App.css';
 import { Navbar,Container,Nav,NavDropdown,Jumbotron,Button } from 'react-bootstrap';
 import Data from './data';
 import Detail from './Detail';
+import axios from 'axios';
 
 import { Link, Route, Switch } from 'react-router-dom';
 
@@ -45,15 +46,28 @@ function App() {
             </p>
           </Jumbotron>
           <div className="container">
-          <div className="row">
-            {
-              shoes.map((a,i) => {
-                return(
-                  <Card shoes={shoes[i]} i={i} key={i} />
-                )
+            <div className="row">
+              {
+                shoes.map((a,i) => {
+                  return(
+                    <Card shoes={shoes[i]} i={i} key={i} />
+                  )
+                })
+              }
+            </div>
+            <button className="btn btn-primary" onClick={()=>{
+
+              
+
+              axios.get('https://codingapple1.github.io/shop/data2.json')
+              .then((result)=>{
+                console.log(result.data);
+                setShoes( [...shoes, ...result.data] );
               })
-            }
-          </div>
+              .catch(()=>{
+                console.log('실패!')
+              });
+            }}>더보기</button>
           </div>
         </Route>
 
