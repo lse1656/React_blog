@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components';
 import './Detail.scss';
@@ -12,7 +12,26 @@ let 제목 = styled.h4`
   color : ${ props => props.색상 }
 `;
 
+// class Detail2 extends React.Component{
+//   componentDidMount(){
+
+//   }
+
+//   componentWillUnmount(){
+
+//   }
+// }
+
 function Detail(props){
+
+  let [alert, setAlert] = useState(true);
+  let [inputData, setInputData] = useState('');
+
+  useEffect(()=>{
+    let 타이머 = setTimeout(()=>{setAlert(setAlert(false))}, 2000);
+    console.log('hi');
+    return ()=>{ clearTimeout(타이머) }
+  },[]);
 
   let { id } = useParams();
   let history = useHistory();
@@ -25,9 +44,16 @@ function Detail(props){
       <박스>
         <제목 className="red">Detail</제목>
       </박스>
-      <div className="my-alert2">
-        <p>재고가 얼마 남지 않았습니다!</p>
-      </div>
+      { inputData }
+      <input onChange={(e)=>{setInputData(e.target.value)}} />
+
+      {
+        alert === true
+        ? <div className="my-alert2">
+          <p>재고가 얼마 남지 않았습니다!</p>
+          </div>
+        : null
+      }
       <div className="row">
         <div className="col-md-6">
           <img src="https://codingapple1.github.io/shop/shoes1.jpg"/>
