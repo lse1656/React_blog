@@ -57,13 +57,13 @@ function App() {
           </div>
         </Route>
 
-      <Route path='/detail/:id'>
-        <Detail shoes={shoes}/>
-      </Route>
+        <Route path='/detail/:id'>
+          <Detail shoes={shoes}/>
+        </Route>
 
-      <Route path='/:id'>
-        <div>아무거나 적었을 때 이거 보여주셈!</div>
-      </Route>
+        <Route path='/:id'>
+          <div>아무거나 적었을 때 이거 보여주셈!</div>
+        </Route>
       </Switch>
       
     </div>
@@ -74,7 +74,7 @@ function Card(props){
   return(
     <div className="col-md-4">
       <img src={"https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"} alt=""/>
-      <h4>{ props.shoes.title }</h4>
+      <h4><Link to={ "/detail/" + props.i }>{ props.shoes.title }</Link></h4>
       <p>{ props.shoes.content } &amp; { props.shoes.price }</p>
     </div>
   )
