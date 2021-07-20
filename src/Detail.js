@@ -12,20 +12,10 @@ let 제목 = styled.h4`
   color : ${ props => props.색상 }
 `;
 
-// class Detail2 extends React.Component{
-//   componentDidMount(){
-
-//   }
-
-//   componentWillUnmount(){
-
-//   }
-// }
 
 function Detail(props){
 
   let [alert, setAlert] = useState(true);
-  let [inputData, setInputData] = useState('');
 
   useEffect(()=>{
     let 타이머 = setTimeout(()=>{setAlert(setAlert(false))}, 2000);
@@ -44,9 +34,6 @@ function Detail(props){
       <박스>
         <제목 className="red">Detail</제목>
       </박스>
-      { inputData }
-      <input onChange={(e)=>{setInputData(e.target.value)}} />
-
       {
         alert === true
         ? <div className="my-alert2">
@@ -62,7 +49,10 @@ function Detail(props){
           <h4 className="pt-5">{products.title}</h4>
           <p>{products.content}</p>
           <p>{products.price}원</p>
-          <button className="btn btn-danger">주문하기</button>
+
+          <Info 재고={ props.재고 }/>
+
+          <button className="btn btn-danger" onClick={()=>{ props.재고변경([9,10,11]) }}>주문하기</button>
           <br />
           <br />
           <button className="btn btn-danger" onClick={()=>{
@@ -71,6 +61,12 @@ function Detail(props){
         </div>
       </div>
     </div>
+  )
+}
+
+function Info(props){
+  return(
+    <p>재고 : { props.재고[0] }</p>
   )
 }
 
