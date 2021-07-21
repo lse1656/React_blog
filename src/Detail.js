@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components';
 import './Detail.scss';
+import {재고context} from './App.js';
 
 let 박스 = styled.div`
   padding : 20px;
@@ -15,6 +16,7 @@ let 제목 = styled.h4`
 
 function Detail(props){
 
+  let 재고 = useContext(재고context);
   let [alert, setAlert] = useState(true);
 
   useEffect(()=>{
@@ -50,7 +52,7 @@ function Detail(props){
           <p>{products.content}</p>
           <p>{products.price}원</p>
 
-          <Info 재고={ props.재고 }/>
+          <Info/>
 
           <button className="btn btn-danger" onClick={()=>{ props.재고변경([9,10,11]) }}>주문하기</button>
           <br />
@@ -65,8 +67,11 @@ function Detail(props){
 }
 
 function Info(props){
+
+  let 재고 = useContext(재고context);
+
   return(
-    <p>재고 : { props.재고[0] }</p>
+    <p>재고 : { 재고[0] }개</p>
   )
 }
 

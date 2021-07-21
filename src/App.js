@@ -1,11 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import './App.css';
 import { Navbar,Container,Nav,NavDropdown,Jumbotron,Button } from 'react-bootstrap';
 import Data from './data';
 import Detail from './Detail';
 import axios from 'axios';
-
 import { Link, Route, Switch } from 'react-router-dom';
+
+
+export let 재고context = React.createContext();
+
 
 function App() {
 
@@ -47,15 +50,19 @@ function App() {
             </p>
           </Jumbotron>
           <div className="container">
-            <div className="row">
-              {
-                shoes.map((a,i) => {
-                  return(
-                    <Card shoes={shoes[i]} i={i} key={i} />
-                  )
-                })
-              }
-            </div>
+
+            <재고context.Provider value={재고}>
+              <div className="row">
+                {
+                  shoes.map((a,i) => {
+                    return(
+                      <Card shoes={shoes[i]} i={i} key={i} />
+                    )
+                  })
+                }
+             </div>
+            </재고context.Provider>
+
             <button className="btn btn-primary" onClick={()=>{
 
 
@@ -72,7 +79,9 @@ function App() {
         </Route>
 
         <Route path='/detail/:id'>
-          <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
+          <재고context.Provider value={재고}>
+            <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
+          </재고context.Provider>
         </Route>
 
         <Route path='/:id'>
@@ -85,13 +94,25 @@ function App() {
 }
 
 function Card(props){
+
+  let 재고 = useContext(재고context);
+
   return(
     <div className="col-md-4">
       <img src={"https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"} alt=""/>
       <h4><Link to={ "/detail/" + props.i }>{ props.shoes.title }</Link></h4>
       <p>{ props.shoes.content } &amp; { props.shoes.price }</p>
+      <Test i={props.i} />
+
     </div>
   )
+}
+
+function Test(props){
+
+  let 재고 = useContext(재고context);
+
+  return <p>재고: {재고[props.i]}개</p>
 }
 
 export default App;
