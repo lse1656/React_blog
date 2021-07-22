@@ -5,6 +5,7 @@ import Data from './data';
 import Detail from './Detail';
 import axios from 'axios';
 import { Link, Route, Switch } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 
 export let 재고context = React.createContext();
